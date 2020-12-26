@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/todo-list/static/css/main.ddc05a1c.chunk.css",
+    "main.js": "/todo-list/static/js/main.3ecd55e3.chunk.js",
+    "main.js.map": "/todo-list/static/js/main.3ecd55e3.chunk.js.map",
+    "runtime-main.js": "/todo-list/static/js/runtime-main.304ebc1c.js",
+    "runtime-main.js.map": "/todo-list/static/js/runtime-main.304ebc1c.js.map",
+    "static/js/2.86f40339.chunk.js": "/todo-list/static/js/2.86f40339.chunk.js",
+    "static/js/2.86f40339.chunk.js.map": "/todo-list/static/js/2.86f40339.chunk.js.map",
+    "index.html": "/todo-list/index.html",
+    "static/css/main.ddc05a1c.chunk.css.map": "/todo-list/static/css/main.ddc05a1c.chunk.css.map",
+    "static/js/2.86f40339.chunk.js.LICENSE.txt": "/todo-list/static/js/2.86f40339.chunk.js.LICENSE.txt",
+    "static/media/icon-cross.6ee81d30.svg": "/todo-list/static/media/icon-cross.6ee81d30.svg",
+    "static/media/icon-moon.6c03114b.svg": "/todo-list/static/media/icon-moon.6c03114b.svg",
+    "static/media/icon-sun.910b1f9a.svg": "/todo-list/static/media/icon-sun.910b1f9a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.304ebc1c.js",
+    "static/js/2.86f40339.chunk.js",
+    "static/css/main.ddc05a1c.chunk.css",
+    "static/js/main.3ecd55e3.chunk.js"
+  ]
+}
