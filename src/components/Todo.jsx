@@ -8,7 +8,10 @@ class Todo extends React.Component {
 				{(provided) => (
 					<div
 						id={this.props.id}
-						className={`todo flex ${this.props.getThemeClass('todo')}`}
+						className={`todo flex ${this.props.getThemeClass('todo')} ${
+							this.props.isCompleted ? 'todo--completed' : undefined
+						}
+						`}
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
 						ref={provided.innerRef}

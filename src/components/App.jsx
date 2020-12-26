@@ -26,7 +26,7 @@ class App extends React.Component {
 				},
 			],
 		});
-		this.setState({ incompleteItems: this.state.incompleteItems + 1 });
+		this.setState({ incompleteItems: this.state.incompleteItems + 1, filterMethod: 'all' });
 	};
 
 	deleteTodo = (idToDelete) => {
@@ -125,7 +125,7 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div className={`${this.getThemeClass('wrapper')}`}>
+			<div className={`wrapper ${this.getThemeClass('wrapper')}`}>
 				<header className={`${this.getThemeClass('header')}`}>
 					<nav className="container flex">
 						<h1>TODO</h1>

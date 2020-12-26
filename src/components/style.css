@@ -8,6 +8,11 @@
 
 body {
 	font-family: 'Raleway', sans-serif;
+	min-height: 100vh;
+}
+
+.wrapper {
+	min-height: 100vh;
 }
 
 .wrapper--light {
@@ -40,8 +45,8 @@ input[type='text'] {
 
 input[type='checkbox'] {
 	transform: scale(1.5);
-    cursor: pointer;
-    margin-right: 8px;
+	cursor: pointer;
+	margin-right: 8px;
 }
 
 input[type='checkbox']:checked {
@@ -141,8 +146,13 @@ nav {
 }
 
 .todo label {
-    margin: 0 8px;
-    opacity: 0.8;
+	margin: 0 8px;
+	opacity: 0.8;
+}
+
+.todo--completed label {
+	text-decoration: line-through;
+	opacity: 0.4;
 }
 
 .todo--delete {
@@ -177,5 +187,4 @@ nav {
 footer {
 	text-align: center;
 	font-weight: 700;
-	opacity: 0.4;
 }
