@@ -2,25 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function FilterBar({ getThemeClass, setFilterMethod, filterMethod }) {
+  const isActiveFilter = (buttonType) => buttonType === filterMethod;
+
   return (
     <div className={`filter-bar flex ${getThemeClass('filter-bar')}`}>
       <button
         type="button"
-        className={filterMethod === 'all' ? 'active-filter' : undefined}
+        className={`${isActiveFilter('all') ? 'active-filter' : undefined} ${getThemeClass('button')}`}
         onClick={() => setFilterMethod('all')}
       >
         All
       </button>
       <button
         type="button"
-        className={filterMethod === 'active' ? 'active-filter' : undefined}
+        className={`${isActiveFilter('active') ? 'active-filter' : undefined} ${getThemeClass('button')}`}
         onClick={() => setFilterMethod('active')}
       >
         Active
       </button>
       <button
         type="button"
-        className={filterMethod === 'completed' ? 'active-filter' : undefined}
+        className={`${isActiveFilter('completed') ? 'active-filter' : undefined} ${getThemeClass('button')}`}
         onClick={() => setFilterMethod('completed')}
       >
         Completed
