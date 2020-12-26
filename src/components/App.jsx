@@ -65,6 +65,7 @@ class App extends React.Component {
     const { todoList, incompleteItems } = this.state;
 
     let updatedTodo;
+
     const updatedList = todoList.filter((todo) => {
       if (todo.id === toggleId) {
         updatedTodo = todo;

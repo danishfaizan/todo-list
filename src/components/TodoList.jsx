@@ -17,6 +17,7 @@ class TodoList extends React.Component {
     const {
       todos, getThemeClass, deleteTodo, toggleTodo,
     } = this.props;
+
     if (todos.length === 0) {
       return (
         <div className={`empty-todo-list ${getThemeClass('empty-todo-list')}`}>
