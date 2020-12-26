@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Raleway', sans-serif;
+}
+
+.wrapper--light {
+	background-color: hsl(0, 0%, 98%);
+}
+
+.wrapper--dark {
+	background-color: hsl(235, 21%, 11%);
+	color: hsl(237, 14%, 26%);
+}
+
+.container {
+	width: 90%;
+	margin: auto;
+	padding: 10px 0;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+input[type='text'] {
+	width: 100%;
+	font-size: 1.2rem;
+	padding: 10px;
+	border-radius: 10px;
+	border: none;
+}
+
+input[type='checkbox'] {
+	transform: scale(1.5);
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+input[type='checkbox']:checked {
+	background-color: grey;
+}
+
+button {
+	border: none;
+	color: grey;
+	font-size: 1rem;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.button--light:hover {
+	color: black;
+}
+
+.button--dark:hover {
+	color: hsl(234, 39%, 85%);
+}
+
+header {
+	padding: 25px 0 50px 0;
+	background-repeat: no-repeat;
+	color: hsl(0, 0%, 98%);
+	background-size: cover;
+}
+
+.header--light {
+	background-image: url('../images/bg-mobile-light.jpg');
+}
+
+.header--dark {
+	background-image: url('../images/bg-mobile-dark.jpg');
+}
+
+nav {
+	justify-content: space-between;
+}
+
+.todo-list {
+	box-shadow: 2px 4px 18px 5px rgba(0, 0, 0, 0.15);
+	margin-top: -40px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	/* min-height: 200px; */
+	overflow: hidden;
+}
+
+.empty-todo-list {
+	text-align: center;
+	padding: 80px 0 40px 0;
+}
+
+.empty-todo-list--light {
+	background-color: white;
+}
+
+.empty-todo-list--dark {
+	background-color: rgb(41, 43, 70);
+	color: hsl(234, 39%, 85%);
+}
+
+.empty-todo-list h1 {
+	opacity: 0.5;
+}
+
+.todos-left {
+	justify-content: space-between;
+	padding: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.todos-left--light {
+	background-color: white;
+}
+
+.todos-left--dark {
+	background-color: rgb(41, 43, 70);
+	color: hsl(234, 39%, 85%);
+}
+
+.todo {
+	margin-bottom: 1px;
+	font-size: 1.2rem;
+	padding: 10px 10px;
+}
+
+.todo--light {
+	background-color: white;
+}
+
+.todo--dark {
+	background-color: rgb(41, 43, 70);
+	color: hsl(234, 39%, 85%);
+}
+
+.todo label {
+    margin: 0 8px;
+    opacity: 0.8;
+}
+
+.todo--delete {
+	margin-left: auto;
+}
+
+.filter-bar {
+	margin-top: 18px;
+	margin-bottom: 50px;
+	justify-content: center;
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: 2px 4px 18px 5px rgba(0, 0, 0, 0.02);
+}
+
+.filter-bar--light {
+	background-color: white;
+}
+
+.filter-bar--dark {
+	background-color: rgb(41, 43, 70);
+}
+
+.filter-bar button {
+	margin-left: 10px;
+}
+
+.active-filter {
+	color: hsl(220, 98%, 61%);
+}
+
+footer {
+	text-align: center;
+	font-weight: 700;
+	opacity: 0.4;
+}
