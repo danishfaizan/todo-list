@@ -8,155 +8,176 @@ import darkModeIcon from '../images/icon-moon.svg';
 import lightModeIcon from '../images/icon-sun.svg';
 
 class App extends React.Component {
-	state = {
-		todoList: [],
-		incompleteItems: 0,
-		filterMethod: 'all',
-		isDarkMode: false,
-	};
+  constructor() {
+    super();
+    this.state = {
+      todoList: [],
+      incompleteItems: 0,
+      filterMethod: 'all',
+      isDarkMode: false,
+    };
+  }
 
-	addTodo = (data) => {
-		this.setState({
-			todoList: [
-				...this.state.todoList,
-				{
-					id: uuidv4(),
-					data,
-					isCompleted: false,
-				},
-			],
-		});
-		this.setState({ incompleteItems: this.state.incompleteItems + 1, filterMethod: 'all' });
-	};
+  getActiveTodos() {
+    const { todoList } = this.state;
+    return todoList.filter(({ isCompleted }) => !isCompleted);
+  }
 
-	deleteTodo = (idToDelete) => {
-		const updatedList = this.state.todoList.filter(({ id, isCompleted }) => {
-			if (id === idToDelete) {
-				if (!isCompleted) {
-					this.setState({ incompleteItems: this.state.incompleteItems - 1 });
-				}
-				return false;
-			} else {
-				return true;
-			}
-		});
-		this.setState({
-			todoList: updatedList,
-		});
-	};
+  getCompletedTodos() {
+    const { todoList } = this.state;
+    return todoList.filter(({ isCompleted }) => isCompleted);
+  }
 
-	toggleTodo = (toggleId) => {
-		let updatedTodo;
-		const updatedList = this.state.todoList.filter((todo) => {
-			if (todo.id === toggleId) {
-				updatedTodo = todo;
-				updatedTodo.isCompleted = !updatedTodo.isCompleted;
-				if (todo.isCompleted) {
-					this.setState({ incompleteItems: this.state.incompleteItems - 1 });
-				} else {
-					this.setState({ incompleteItems: this.state.incompleteItems + 1 });
-				}
+  deleteTodo = (idToDelete) => {
+    const { todoList, incompleteItems } = this.state;
 
-				return false;
-			}
-			return true;
-		});
+    const updatedList = todoList.filter(({ id, isCompleted }) => {
+      if (id === idToDelete) {
+        if (!isCompleted) {
+          this.setState({ incompleteItems: incompleteItems - 1 });
+        }
+        return false;
+      }
+      return true;
+    });
+    this.setState({
+      todoList: updatedList,
+    });
+  };
 
-		if (updatedTodo) {
-			updatedList.unshift(updatedTodo);
-		}
+  addTodo = (data) => {
+    const { todoList, incompleteItems } = this.state;
 
-		this.setState({
-			todoList: updatedList,
-		});
-	};
+    this.setState({
+      todoList: [
+        ...todoList,
+        {
+          id: uuidv4(),
+          data,
+          isCompleted: false,
+        },
+      ],
+    });
+    this.setState({ incompleteItems: incompleteItems + 1, filterMethod: 'all' });
+  };
 
-	getActiveTodos() {
-		return this.state.todoList.filter(({ isCompleted }) => !isCompleted);
-	}
+  toggleTodo = (toggleId) => {
+    const { todoList, incompleteItems } = this.state;
 
-	getCompletedTodos() {
-		return this.state.todoList.filter(({ isCompleted }) => isCompleted);
-	}
+    let updatedTodo;
+    const updatedList = todoList.filter((todo) => {
+      if (todo.id === toggleId) {
+        updatedTodo = todo;
+        updatedTodo.isCompleted = !updatedTodo.isCompleted;
+        if (todo.isCompleted) {
+          this.setState({ incompleteItems: incompleteItems - 1 });
+        } else {
+          this.setState({ incompleteItems: incompleteItems + 1 });
+        }
 
-	clearCompleteTodos = () => {
-		const updatedList = this.state.todoList.filter((todo) => !todo.isCompleted);
-		this.setState({ todoList: updatedList });
-	};
+        return false;
+      }
+      return true;
+    });
 
-	getFilteredTodos = () => {
-		if (this.state.filterMethod === 'completed') {
-			return this.getCompletedTodos();
-		} else if (this.state.filterMethod === 'active') {
-			return this.getActiveTodos();
-		}
-		return this.state.todoList;
-	};
+    if (updatedTodo) {
+      updatedList.unshift(updatedTodo);
+    }
 
-	setFilterMethod = (filterMethod) => {
-		this.setState({ filterMethod });
-	};
+    this.setState({
+      todoList: updatedList,
+    });
+  };
 
-	reorderTodos = (sourceIndex, destinationIndex) => {
-		console.log('Reordering todos ', sourceIndex, destinationIndex);
-		const filteredTodos = this.getFilteredTodos();
-		const todoCopy = [...filteredTodos];
-		todoCopy.splice(sourceIndex, 1);
-		todoCopy.splice(destinationIndex, 0, filteredTodos[sourceIndex]);
+  clearCompleteTodos = () => {
+    const { todoList } = this.state;
 
-		if (this.state.filterMethod === 'completed') {
-			this.setState({ todoList: [...todoCopy, ...this.getActiveTodos()] });
-		} else {
-			this.setState({ todoList: [...this.getCompletedTodos(), ...todoCopy] });
-		}
-	};
+    const updatedList = todoList.filter((todo) => !todo.isCompleted);
+    this.setState({ todoList: updatedList });
+  };
 
-	toggleDarkMode = () => {
-		this.setState({ isDarkMode: !this.state.isDarkMode });
-	};
+  getFilteredTodos = () => {
+    const { todoList, filterMethod } = this.state;
 
-	getThemeClass = (className) => {
-		if (this.state.isDarkMode) {
-			return className + '--dark';
-		} else {
-			return className + '--light';
-		}
-	};
+    if (filterMethod === 'completed') {
+      return this.getCompletedTodos();
+    }
+    if (filterMethod === 'active') {
+      return this.getActiveTodos();
+    }
+    return todoList;
+  };
 
-	render() {
-		return (
-			<div className={`wrapper ${this.getThemeClass('wrapper')}`}>
-				<header className={`${this.getThemeClass('header')}`}>
-					<nav className="container flex">
-						<h1>TODO</h1>
-						<button onClick={this.toggleDarkMode}>
-							<img src={this.state.isDarkMode ? lightModeIcon : darkModeIcon} alt="dark mode" />
-						</button>
-					</nav>
-					<AddTodoBar addTodo={this.addTodo} />
-				</header>
-				<main className="container">
-					<TodoList
-						todos={this.getFilteredTodos()}
-						toggleTodo={this.toggleTodo}
-						deleteTodo={this.deleteTodo}
-						incompleteItems={this.state.incompleteItems}
-						clearCompleteTodos={this.clearCompleteTodos}
-						reorderTodos={this.reorderTodos}
-						getThemeClass={this.getThemeClass}
-					/>
-					<FilterBar
-						getThemeClass={this.getThemeClass}
-						setFilterMethod={this.setFilterMethod}
-						filterMethod={this.state.filterMethod}
-					/>
-				</main>
-				<footer className="container">
-					<p>Drag and drop to reorder list</p>
-				</footer>
-			</div>
-		);
-	}
+  setFilterMethod = (filterMethod) => {
+    this.setState({ filterMethod });
+  };
+
+  reorderTodos = (sourceIndex, destinationIndex) => {
+    const filteredTodos = this.getFilteredTodos();
+    const todoCopy = [...filteredTodos];
+    todoCopy.splice(sourceIndex, 1);
+    todoCopy.splice(destinationIndex, 0, filteredTodos[sourceIndex]);
+
+    const { filterMethod } = this.state;
+
+    if (filterMethod === 'completed') {
+      this.setState({ todoList: [...todoCopy, ...this.getActiveTodos()] });
+    } else {
+      this.setState({ todoList: [...this.getCompletedTodos(), ...todoCopy] });
+    }
+  };
+
+  toggleDarkMode = () => {
+    const { isDarkMode } = this.state;
+
+    this.setState({ isDarkMode: !isDarkMode });
+  };
+
+  getThemeClass = (className) => {
+    const { isDarkMode } = this.state;
+
+    if (isDarkMode) {
+      return `${className}--dark`;
+    }
+    return `${className}--light`;
+  };
+
+  render() {
+    const { isDarkMode, incompleteItems, filterMethod } = this.state;
+
+    return (
+      <div className={`wrapper ${this.getThemeClass('wrapper')}`}>
+        <header className={`${this.getThemeClass('header')}`}>
+          <nav className="container flex">
+            <h1>TODO</h1>
+            <button type="button" onClick={this.toggleDarkMode}>
+              <img src={isDarkMode ? lightModeIcon : darkModeIcon} alt="dark mode" />
+            </button>
+          </nav>
+          <AddTodoBar addTodo={this.addTodo} />
+        </header>
+        <main className="container">
+          <TodoList
+            todos={this.getFilteredTodos()}
+            toggleTodo={this.toggleTodo}
+            deleteTodo={this.deleteTodo}
+            incompleteItems={incompleteItems}
+            clearCompleteTodos={this.clearCompleteTodos}
+            reorderTodos={this.reorderTodos}
+            getThemeClass={this.getThemeClass}
+          />
+          <FilterBar
+            getThemeClass={this.getThemeClass}
+            setFilterMethod={this.setFilterMethod}
+            filterMethod={filterMethod}
+          />
+        </main>
+        <footer className="container">
+          <p>Drag and drop to reorder list</p>
+        </footer>
+      </div>
+    );
+  }
 }
 
 export default App;
