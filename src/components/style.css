@@ -188,6 +188,8 @@ nav {
 footer {
   text-align: center;
   font-weight: 700;
+  opacity: 0.4;
+  color: grey;
 }
 
 @media (min-width: 760px) {
@@ -200,6 +202,6 @@ footer {
   }
 
   .container {
-      max-width: 900px;
+    max-width: 900px;
   }
 }

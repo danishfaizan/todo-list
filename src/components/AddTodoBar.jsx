@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
 
 class AddTodoBar extends React.Component {
   constructor() {
@@ -16,9 +18,9 @@ class AddTodoBar extends React.Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const { newTodo } = this.state;
-    const { addTodo } = this.props;
+    const { addTodoAction } = this.props;
     if (newTodo) {
-      addTodo(newTodo);
+      addTodoAction(newTodo);
     }
     this.setState({ newTodo: '' });
   };
@@ -34,7 +36,7 @@ class AddTodoBar extends React.Component {
 }
 
 AddTodoBar.propTypes = {
-  addTodo: PropTypes.func.isRequired,
+  addTodoAction: PropTypes.func.isRequired,
 };
 
-export default AddTodoBar;
+export default connect(null, { addTodoAction: addTodo })(AddTodoBar);

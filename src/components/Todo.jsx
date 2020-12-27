@@ -1,12 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
+import { connect } from 'react-redux';
 import crossIcon from '../images/icon-cross.svg';
+import { getThemeClass } from '../utils';
+import { toggleTodo, deleteTodo } from '../actions';
 
 class Todo extends React.Component {
   render() {
     const {
-      id, index, value, isCompleted, getThemeClass, toggleTodo, deleteTodo,
+      id,
+      index,
+      value,
+      isCompleted,
+      toggleTodoAction,
+      deleteTodoAction,
+      isDarkMode,
     } = this.props;
 
     return (
@@ -14,7 +23,9 @@ class Todo extends React.Component {
         {(provided) => (
           <div
             id={id}
-            className={`todo flex ${getThemeClass('todo')} ${isCompleted ? 'todo--completed' : undefined}`}
+            className={`todo flex ${getThemeClass('todo', isDarkMode)} ${
+              isCompleted ? 'todo--completed' : undefined
+            }`}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
@@ -24,10 +35,10 @@ class Todo extends React.Component {
               id={id}
               name="todo"
               defaultChecked={isCompleted}
-              onClick={() => toggleTodo(id)}
+              onClick={() => toggleTodoAction(id)}
             />
             <label htmlFor={id}>{value}</label>
-            <button type="button" className="todo--delete" onClick={() => deleteTodo(id)}>
+            <button type="button" className="todo--delete" onClick={() => deleteTodoAction(id)}>
               <img src={crossIcon} alt="Delete todo" />
             </button>
           </div>
@@ -42,9 +53,18 @@ Todo.propTypes = {
   value: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   isCompleted: PropTypes.bool.isRequired,
-  getThemeClass: PropTypes.func.isRequired,
-  toggleTodo: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
+  toggleTodoAction: PropTypes.func.isRequired,
+  deleteTodoAction: PropTypes.func.isRequired,
+  isDarkMode: PropTypes.bool.isRequired,
 };
 
-export default Todo;
+function mapStateToProps({ isDarkMode }) {
+  return {
+    isDarkMode,
+  };
+}
+
+export default connect(mapStateToProps, {
+  toggleTodoAction: toggleTodo,
+  deleteTodoAction: deleteTodo,
+})(Todo);

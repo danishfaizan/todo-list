@@ -1,29 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getThemeClass } from '../utils';
 
-function FilterBar({ getThemeClass, setFilterMethod, filterMethod }) {
-  const isActiveFilter = (buttonType) => buttonType === filterMethod;
+function FilterBar({ setFilterType, filterType, isDarkMode }) {
+  const isActiveFilter = (buttonType) => buttonType === filterType;
 
   return (
-    <div className={`filter-bar flex ${getThemeClass('filter-bar')}`}>
+    <div className={`filter-bar flex ${getThemeClass('filter-bar', isDarkMode)}`}>
       <button
         type="button"
-        className={`${isActiveFilter('all') ? 'active-filter' : undefined} ${getThemeClass('button')}`}
-        onClick={() => setFilterMethod('all')}
+        className={`${isActiveFilter('all') ? 'active-filter' : undefined} ${getThemeClass(
+          'button',
+          isDarkMode,
+        )}`}
+        onClick={() => setFilterType('all')}
       >
         All
       </button>
       <button
         type="button"
-        className={`${isActiveFilter('active') ? 'active-filter' : undefined} ${getThemeClass('button')}`}
-        onClick={() => setFilterMethod('active')}
+        className={`${isActiveFilter('active') ? 'active-filter' : undefined} ${getThemeClass(
+          'button',
+          isDarkMode,
+        )}`}
+        onClick={() => setFilterType('INCOMPLETE')}
       >
         Active
       </button>
       <button
         type="button"
-        className={`${isActiveFilter('completed') ? 'active-filter' : undefined} ${getThemeClass('button')}`}
-        onClick={() => setFilterMethod('completed')}
+        className={`${isActiveFilter('completed') ? 'active-filter' : undefined} ${getThemeClass(
+          'button',
+          isDarkMode,
+        )}`}
+        onClick={() => setFilterType('COMPLETED')}
       >
         Completed
       </button>
@@ -32,9 +43,15 @@ function FilterBar({ getThemeClass, setFilterMethod, filterMethod }) {
 }
 
 FilterBar.propTypes = {
-  getThemeClass: PropTypes.func.isRequired,
-  setFilterMethod: PropTypes.func.isRequired,
-  filterMethod: PropTypes.string.isRequired,
+  setFilterType: PropTypes.func.isRequired,
+  filterType: PropTypes.string.isRequired,
+  isDarkMode: PropTypes.bool.isRequired,
 };
 
-export default FilterBar;
+function mapStateToProps({ isDarkMode }) {
+  return {
+    isDarkMode,
+  };
+}
+
+export default connect(mapStateToProps)(FilterBar);
