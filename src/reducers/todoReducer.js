@@ -13,7 +13,7 @@ export default function todoReducer(todos = [], { type, payload }) {
       return todos.filter((todo) => todo.isCompleted === false);
 
     case 'REORDER_TODOS':
-      return reorderTodos();
+      return reorderTodos(todos, payload.sourceIndex, payload.destinationIndex);
 
     default:
       return todos;
@@ -34,13 +34,10 @@ function toggleTodo(todos, id) {
   return todoCopy;
 }
 
-function reorderTodos(todos, sourceIndex, destinationIndex, filterType) {
+function reorderTodos(todos, sourceIndex, destinationIndex) {
   const todoCopy = [...todos];
   todoCopy.splice(sourceIndex, 1);
   todoCopy.splice(destinationIndex, 0, todos[sourceIndex]);
 
-  if (filterType === 'COMPLETED') {
-    return [...todoCopy, ...this.getActiveTodos()];
-  }
-  return [...this.getCompletedTodos(), ...todoCopy];
+  return todoCopy;
 }

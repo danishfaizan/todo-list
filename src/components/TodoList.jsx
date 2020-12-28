@@ -12,8 +12,18 @@ class TodoList extends React.Component {
     if (!destination) {
       return;
     }
-    const { reorderTodosAction } = this.props;
-    reorderTodosAction(source.index, destination.index);
+    const {
+      reorderTodosAction, completeItemsCount, filterType,
+    } = this.props;
+
+    if (filterType === 'INCOMPLETE' && completeItemsCount) {
+      reorderTodosAction(
+        source.index + (completeItemsCount),
+        destination.index + (completeItemsCount),
+      );
+    } else {
+      reorderTodosAction(source.index, destination.index);
+    }
   };
 
   generateTodos() {
@@ -62,13 +72,16 @@ class TodoList extends React.Component {
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object).isRequired,
   incompleteItemsCount: PropTypes.number.isRequired,
+  completeItemsCount: PropTypes.number.isRequired,
   reorderTodosAction: PropTypes.func.isRequired,
   clearCompletedTodosAction: PropTypes.func.isRequired,
   isDarkMode: PropTypes.bool.isRequired,
+  filterType: PropTypes.string.isRequired,
 };
 
 function mapStateToProps({ todos, isDarkMode }, { filterType }) {
   const incompleteItemsCount = todos.reduce((sum, todo) => (!todo.isCompleted ? sum + 1 : sum), 0);
+  const completeItemsCount = todos.length - incompleteItemsCount;
   let filteredTodos;
 
   switch (filterType) {
@@ -87,6 +100,7 @@ function mapStateToProps({ todos, isDarkMode }, { filterType }) {
   return {
     todos: filteredTodos,
     incompleteItemsCount,
+    completeItemsCount,
     isDarkMode,
   };
 }

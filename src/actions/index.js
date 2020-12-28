@@ -35,9 +35,13 @@ export function clearCompletedTodos() {
   };
 }
 
-export function reorderTodos() {
+export function reorderTodos(sourceIndex, destinationIndex) {
   return {
     type: 'REORDER_TODOS',
+    payload: {
+      sourceIndex,
+      destinationIndex,
+    },
   };
 }
 
