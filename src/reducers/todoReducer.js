@@ -1,19 +1,21 @@
-export default function todoReducer(todos = [], { type, payload }) {
+import { getFromLocalStorage, saveToLocalStorage } from '../utils';
+
+export default function todoReducer(todos = getFromLocalStorage('todos') || [], { type, payload }) {
   switch (type) {
     case 'ADD_TODO':
-      return [...todos, payload];
+      return saveToLocalStorage('todos', [...todos, payload]);
 
     case 'DELETE_TODO':
-      return todos.filter((todo) => todo.id !== payload.id);
+      return saveToLocalStorage('todos', todos.filter((todo) => todo.id !== payload.id));
 
     case 'TOGGLE_TODO':
-      return toggleTodo(todos, payload.id);
+      return saveToLocalStorage('todos', toggleTodo(todos, payload.id));
 
     case 'CLEAR_COMPLETED_TODOS':
-      return todos.filter((todo) => todo.isCompleted === false);
+      return saveToLocalStorage('todos', todos.filter((todo) => todo.isCompleted === false));
 
     case 'REORDER_TODOS':
-      return reorderTodos(todos, payload.sourceIndex, payload.destinationIndex);
+      return saveToLocalStorage('todos', reorderTodos(todos, payload.sourceIndex, payload.destinationIndex));
 
     default:
       return todos;

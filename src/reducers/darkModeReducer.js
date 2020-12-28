@@ -1,6 +1,8 @@
-export default function todoReducer(isDarkMode = false, action) {
+import { getFromLocalStorage, saveToLocalStorage } from '../utils';
+
+export default function todoReducer(isDarkMode = getFromLocalStorage('isDarkMode') || false, action) {
   if (action.type === 'TOGGLE_DARK_MODE') {
-    return !isDarkMode;
+    return saveToLocalStorage('isDarkMode', !isDarkMode);
   }
 
   return isDarkMode;
