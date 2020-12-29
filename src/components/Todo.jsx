@@ -37,7 +37,7 @@ class Todo extends React.Component {
               defaultChecked={isCompleted}
               onClick={() => toggleTodoAction(id)}
             />
-            <label htmlFor={id}>{value}</label>
+            <input className={`todo-text ${getThemeClass('todo-text', isDarkMode)}`} type="text" value={value} />
             <button type="button" className="todo--delete" onClick={() => deleteTodoAction(id)}>
               <img src={crossIcon} alt="Delete todo" />
             </button>
