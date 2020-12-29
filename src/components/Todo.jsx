@@ -45,7 +45,6 @@ function Todo(props) {
             onClick={() => toggleTodoAction(id)}
           />
           <input
-            readOnly
             className={`todo-text ${getThemeClass('todo-text', isDarkMode)}`}
             type="text"
             value={inputValue}
