@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AddTodoBar from './AddTodoBar';
@@ -10,46 +10,29 @@ import lightModeIcon from '../images/icon-sun.svg';
 import { getThemeClass } from '../utils';
 import { toggleDarkMode } from '../actions';
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      filterType: 'ALL',
-    };
-  }
+function App({ isDarkMode, toggleDarkModeAction }) {
+  const [filterType, setFilterType] = useState('ALL');
 
-  setFilterType = (filterType) => {
-    this.setState({ filterType });
-  };
-
-  render() {
-    const { filterType } = this.state;
-    const { isDarkMode, toggleDarkModeAction } = this.props;
-
-    return (
-      <div className={`wrapper ${getThemeClass('wrapper', isDarkMode)}`}>
-        <header className={`${getThemeClass('header', isDarkMode)}`}>
-          <nav className="container flex">
-            <h1>TODO</h1>
-            <button type="button" onClick={toggleDarkModeAction}>
-              <img src={isDarkMode ? lightModeIcon : darkModeIcon} alt="dark mode" />
-            </button>
-          </nav>
-          <AddTodoBar addTodo={this.addTodo} />
-        </header>
-        <main className="container">
-          <TodoList filterType={filterType} />
-          <FilterBar
-            setFilterType={this.setFilterType}
-            filterType={filterType}
-          />
-        </main>
-        <footer className="container">
-          <p>Drag and drop to reorder list</p>
-        </footer>
-      </div>
-    );
-  }
+  return (
+    <div className={`wrapper ${getThemeClass('wrapper', isDarkMode)}`}>
+      <header className={`${getThemeClass('header', isDarkMode)}`}>
+        <nav className="container flex">
+          <h1>TODO</h1>
+          <button type="button" onClick={toggleDarkModeAction}>
+            <img src={isDarkMode ? lightModeIcon : darkModeIcon} alt="dark mode" />
+          </button>
+        </nav>
+        <AddTodoBar />
+      </header>
+      <main className="container">
+        <TodoList filterType={filterType} />
+        <FilterBar setFilterType={setFilterType} filterType={filterType} />
+      </main>
+      <footer className="container">
+        <p>Drag and drop to reorder list</p>
+      </footer>
+    </div>
+  );
 }
 
 App.propTypes = {

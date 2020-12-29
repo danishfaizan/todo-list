@@ -1,38 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 
-class AddTodoBar extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      newTodo: '',
-    };
-  }
+function AddTodoBar(props) {
+  const [newTodo, setNewTodo] = useState('');
 
-  handleInputChange = (event) => {
-    this.setState({ newTodo: event.target.value });
+  const handleInputChange = (event) => {
+    setNewTodo(event.target.value);
   };
 
-  handleFormSubmit = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-    const { newTodo } = this.state;
-    const { addTodoAction } = this.props;
+    const { addTodoAction } = props;
     if (newTodo) {
       addTodoAction(newTodo);
     }
-    this.setState({ newTodo: '' });
+    setNewTodo('');
   };
 
-  render() {
-    const { newTodo } = this.state;
-    return (
-      <form className="container" onSubmit={this.handleFormSubmit}>
-        <input type="text" value={newTodo} onChange={this.handleInputChange} />
-      </form>
-    );
-  }
+  return (
+    <form className="container" onSubmit={handleFormSubmit}>
+      <input type="text" value={newTodo} onChange={handleInputChange} />
+    </form>
+  );
 }
 
 AddTodoBar.propTypes = {

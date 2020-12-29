@@ -1,51 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
 import crossIcon from '../images/icon-cross.svg';
 import { getThemeClass } from '../utils';
-import { toggleTodo, deleteTodo } from '../actions';
+import { toggleTodo, deleteTodo, updateTodo } from '../actions';
 
-class Todo extends React.Component {
-  render() {
-    const {
-      id,
-      index,
-      value,
-      isCompleted,
-      toggleTodoAction,
-      deleteTodoAction,
-      isDarkMode,
-    } = this.props;
+function Todo(props) {
+  const {
+    id,
+    index,
+    value,
+    isCompleted,
+    toggleTodoAction,
+    deleteTodoAction,
+    isDarkMode,
+    updateTodoAction,
+  } = props;
 
-    return (
-      <Draggable key={id} draggableId={id} index={index}>
-        {(provided) => (
-          <div
+  const [inputValue, setInputValue] = useState(value);
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    updateTodoAction(id, event.target.value);
+  };
+
+  return (
+    <Draggable key={id} draggableId={id} index={index}>
+      {(provided) => (
+        <div
+          id={id}
+          className={`todo flex ${getThemeClass('todo', isDarkMode)} ${
+            isCompleted ? 'todo--completed' : undefined
+          }`}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <input
+            type="checkbox"
             id={id}
-            className={`todo flex ${getThemeClass('todo', isDarkMode)} ${
-              isCompleted ? 'todo--completed' : undefined
-            }`}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-          >
-            <input
-              type="checkbox"
-              id={id}
-              name="todo"
-              defaultChecked={isCompleted}
-              onClick={() => toggleTodoAction(id)}
-            />
-            <input className={`todo-text ${getThemeClass('todo-text', isDarkMode)}`} type="text" value={value} />
-            <button type="button" className="todo--delete" onClick={() => deleteTodoAction(id)}>
-              <img src={crossIcon} alt="Delete todo" />
-            </button>
-          </div>
-        )}
-      </Draggable>
-    );
-  }
+            name="todo"
+            defaultChecked={isCompleted}
+            onClick={() => toggleTodoAction(id)}
+          />
+          <input
+            readOnly
+            className={`todo-text ${getThemeClass('todo-text', isDarkMode)}`}
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <button type="button" className="todo--delete" onClick={() => deleteTodoAction(id)}>
+            <img src={crossIcon} alt="Delete todo" />
+          </button>
+        </div>
+      )}
+    </Draggable>
+  );
 }
 
 Todo.propTypes = {
@@ -56,6 +68,7 @@ Todo.propTypes = {
   toggleTodoAction: PropTypes.func.isRequired,
   deleteTodoAction: PropTypes.func.isRequired,
   isDarkMode: PropTypes.bool.isRequired,
+  updateTodoAction: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ isDarkMode }) {
@@ -67,4 +80,5 @@ function mapStateToProps({ isDarkMode }) {
 export default connect(mapStateToProps, {
   toggleTodoAction: toggleTodo,
   deleteTodoAction: deleteTodo,
+  updateTodoAction: updateTodo,
 })(Todo);

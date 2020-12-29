@@ -6,29 +6,31 @@ import Todo from './Todo';
 import { getThemeClass } from '../utils';
 import { addTodo, clearCompletedTodos, reorderTodos } from '../actions';
 
-class TodoList extends React.Component {
-  handleOnDragEnd = (result) => {
+function TodoList(props) {
+  const {
+    filterType,
+    incompleteItemsCount,
+    completeItemsCount,
+    clearCompletedTodosAction,
+    isDarkMode,
+    reorderTodosAction,
+    todos,
+  } = props;
+
+  const handleOnDragEnd = (result) => {
     const { destination, source } = result;
     if (!destination) {
       return;
     }
-    const {
-      reorderTodosAction, completeItemsCount, filterType,
-    } = this.props;
 
     if (filterType === 'INCOMPLETE' && completeItemsCount) {
-      reorderTodosAction(
-        source.index + (completeItemsCount),
-        destination.index + (completeItemsCount),
-      );
+      reorderTodosAction(source.index + completeItemsCount, destination.index + completeItemsCount);
     } else {
       reorderTodosAction(source.index, destination.index);
     }
   };
 
-  generateTodos() {
-    const { todos, isDarkMode } = this.props;
-
+  function generateTodos() {
     if (todos.length === 0) {
       return (
         <div className={`empty-todo-list ${getThemeClass('empty-todo-list', isDarkMode)}`}>
@@ -42,31 +44,28 @@ class TodoList extends React.Component {
     ));
   }
 
-  render() {
-    const { incompleteItemsCount, clearCompletedTodosAction, isDarkMode } = this.props;
-    return (
-      <DragDropContext onDragEnd={this.handleOnDragEnd}>
-        <Droppable droppableId="todos">
-          {(provided) => (
-            <div className="todo-list" {...provided.droppableProps} ref={provided.innerRef}>
-              <div>{this.generateTodos()}</div>
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-        <div className={`flex todos-left ${getThemeClass('todos-left', isDarkMode)}`}>
-          <span>
-            {incompleteItemsCount}
-            {' '}
-            items left
-          </span>
-          <button type="button" onClick={clearCompletedTodosAction}>
-            Clear Completed
-          </button>
-        </div>
-      </DragDropContext>
-    );
-  }
+  return (
+    <DragDropContext onDragEnd={handleOnDragEnd}>
+      <Droppable droppableId="todos">
+        {(provided) => (
+          <div className="todo-list" {...provided.droppableProps} ref={provided.innerRef}>
+            <div>{generateTodos()}</div>
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+      <div className={`flex todos-left ${getThemeClass('todos-left', isDarkMode)}`}>
+        <span>
+          {incompleteItemsCount}
+          {' '}
+          items left
+        </span>
+        <button type="button" onClick={clearCompletedTodosAction}>
+          Clear Completed
+        </button>
+      </div>
+    </DragDropContext>
+  );
 }
 
 TodoList.propTypes = {
