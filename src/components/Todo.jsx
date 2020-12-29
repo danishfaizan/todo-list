@@ -25,6 +25,12 @@ function Todo(props) {
     updateTodoAction(id, event.target.value);
   };
 
+  const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      event.target.blur();
+    }
+  };
+
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(provided) => (
@@ -49,6 +55,7 @@ function Todo(props) {
             type="text"
             value={inputValue}
             onChange={handleInputChange}
+            onKeyPress={handleEnter}
           />
           <button type="button" className="todo--delete" onClick={() => deleteTodoAction(id)}>
             <img src={crossIcon} alt="Delete todo" />
