@@ -6,16 +6,31 @@ export default function todoReducer(todos = getFromLocalStorage('todos') || [], 
       return saveToLocalStorage('todos', [...todos, payload]);
 
     case 'DELETE_TODO':
-      return saveToLocalStorage('todos', todos.filter((todo) => todo.id !== payload.id));
+      return saveToLocalStorage(
+        'todos',
+        todos.filter((todo) => todo.id !== payload.id),
+      );
+
+    case 'UPDATE_TODO':
+      return saveToLocalStorage(
+        'todos',
+        todos.map((todo) => (todo.id === payload.id ? { ...todo, value: payload.value } : todo)),
+      );
 
     case 'TOGGLE_TODO':
       return saveToLocalStorage('todos', toggleTodo(todos, payload.id));
 
     case 'CLEAR_COMPLETED_TODOS':
-      return saveToLocalStorage('todos', todos.filter((todo) => todo.isCompleted === false));
+      return saveToLocalStorage(
+        'todos',
+        todos.filter((todo) => todo.isCompleted === false),
+      );
 
     case 'REORDER_TODOS':
-      return saveToLocalStorage('todos', reorderTodos(todos, payload.sourceIndex, payload.destinationIndex));
+      return saveToLocalStorage(
+        'todos',
+        reorderTodos(todos, payload.sourceIndex, payload.destinationIndex),
+      );
 
     default:
       return todos;
