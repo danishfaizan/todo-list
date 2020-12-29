@@ -12,11 +12,15 @@ function AddTodoBar(props) {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const { addTodoAction } = props;
+    const { addTodoAction, filterType, setFilterType } = props;
     if (newTodo) {
       addTodoAction(newTodo);
     }
     setNewTodo('');
+
+    if (filterType === 'COMPLETED') {
+      setFilterType('ALL');
+    }
   };
 
   return (
@@ -28,6 +32,8 @@ function AddTodoBar(props) {
 
 AddTodoBar.propTypes = {
   addTodoAction: PropTypes.func.isRequired,
+  filterType: PropTypes.string.isRequired,
+  setFilterType: PropTypes.func.isRequired,
 };
 
 export default connect(null, { addTodoAction: addTodo })(AddTodoBar);

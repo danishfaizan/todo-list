@@ -22,7 +22,7 @@ function App({ isDarkMode, toggleDarkModeAction }) {
             <img src={isDarkMode ? lightModeIcon : darkModeIcon} alt="dark mode" />
           </button>
         </nav>
-        <AddTodoBar />
+        <AddTodoBar filterType={filterType} setFilterType={setFilterType} />
       </header>
       <main className="container">
         <TodoList filterType={filterType} />
