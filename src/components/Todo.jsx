@@ -50,7 +50,7 @@ function Todo(props) {
             defaultChecked={isCompleted}
             onClick={() => toggleTodoAction(id)}
           />
-          <input
+          <textarea
             className={`todo-text ${getThemeClass('todo-text', isDarkMode)}`}
             type="text"
             value={inputValue}
