@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Todo from './Todo';
@@ -17,14 +17,14 @@ function TodoList(props) {
     todos,
   } = props;
 
-  const todosCountRef = useRef(todos.length);
+  // const todosCountRef = useRef(todos.length);
 
-  useEffect(() => {
-    if (todosCountRef.current < todos.length) {
-      todosCountRef.current = todos.length;
-      document.getElementById(todos[todos.length - 1].id).scrollIntoView({ behavior: 'smooth' });
-    }
-  });
+  // useEffect(() => {
+  //   if (todosCountRef.current < todos.length) {
+  //     todosCountRef.current = todos.length;
+  //     document.getElementById(todos[todos.length - 1].id).scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // });
 
   const handleOnDragEnd = (result) => {
     const { destination, source } = result;

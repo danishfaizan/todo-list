@@ -3,7 +3,7 @@ import { getFromLocalStorage, saveToLocalStorage } from '../utils';
 export default function todoReducer(todos = getFromLocalStorage('todos') || [], { type, payload }) {
   switch (type) {
     case 'ADD_TODO':
-      return saveToLocalStorage('todos', [...todos, payload]);
+      return saveToLocalStorage('todos', [payload, ...todos]);
 
     case 'DELETE_TODO':
       return saveToLocalStorage(
@@ -47,7 +47,7 @@ function toggleTodo(todos, id) {
 
   const todoCopy = [...todos];
   todoCopy.splice(todoIndex, 1);
-  todoCopy.unshift(foundTodo);
+  todoCopy.push(foundTodo);
   return todoCopy;
 }
 
