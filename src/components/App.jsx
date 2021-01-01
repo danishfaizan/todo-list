@@ -24,7 +24,7 @@ function App({ isDarkMode, toggleDarkModeAction }) {
         </nav>
         <AddTodoBar filterType={filterType} setFilterType={setFilterType} />
       </header>
-      <main className="container">
+      <main className="container main">
         <TodoList filterType={filterType} />
         <FilterBar setFilterType={setFilterType} filterType={filterType} />
       </main>
