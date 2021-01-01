@@ -17,15 +17,6 @@ function TodoList(props) {
     todos,
   } = props;
 
-  // const todosCountRef = useRef(todos.length);
-
-  // useEffect(() => {
-  //   if (todosCountRef.current < todos.length) {
-  //     todosCountRef.current = todos.length;
-  //     document.getElementById(todos[todos.length - 1].id).scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // });
-
   const handleOnDragEnd = (result) => {
     const { destination, source } = result;
     if (!destination) {
