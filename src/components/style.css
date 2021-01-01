@@ -87,10 +87,6 @@ header {
   color: hsl(0, 0%, 98%);
   background-size: cover;
   width: 100%;
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
 }
 
 .header--light {
@@ -101,20 +97,15 @@ header {
   background-image: url('../images/bg-mobile-dark.jpg');
 }
 
-.main {
-  margin-top: 180px;
-}
-
 nav {
   justify-content: space-between;
 }
 
 .todo-list {
   box-shadow: 2px 4px 18px 5px rgba(0, 0, 0, 0.15);
-  /* margin-top: -40px; */
+  margin-top: -40px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  /* min-height: 200px; */
   overflow: hidden;
 }
 
@@ -178,14 +169,13 @@ nav {
   color: hsl(234, 39%, 85%);
 }
 
-.todo-text--light{
+.todo-text--light {
   background-color: white;
 }
 
 .todo--completed .todo-text {
   text-decoration: line-through;
   opacity: 0.4;
-
 }
 
 .todo--delete {
