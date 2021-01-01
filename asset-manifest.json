@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/todo-list/static/css/main.4f553454.chunk.css",
-    "main.js": "/todo-list/static/js/main.c7da0f24.chunk.js",
-    "main.js.map": "/todo-list/static/js/main.c7da0f24.chunk.js.map",
+    "main.css": "/todo-list/static/css/main.8bd25870.chunk.css",
+    "main.js": "/todo-list/static/js/main.eeb9885c.chunk.js",
+    "main.js.map": "/todo-list/static/js/main.eeb9885c.chunk.js.map",
     "runtime-main.js": "/todo-list/static/js/runtime-main.304ebc1c.js",
     "runtime-main.js.map": "/todo-list/static/js/runtime-main.304ebc1c.js.map",
     "static/js/2.afae2eb6.chunk.js": "/todo-list/static/js/2.afae2eb6.chunk.js",
     "static/js/2.afae2eb6.chunk.js.map": "/todo-list/static/js/2.afae2eb6.chunk.js.map",
     "index.html": "/todo-list/index.html",
-    "static/css/main.4f553454.chunk.css.map": "/todo-list/static/css/main.4f553454.chunk.css.map",
+    "static/css/main.8bd25870.chunk.css.map": "/todo-list/static/css/main.8bd25870.chunk.css.map",
     "static/js/2.afae2eb6.chunk.js.LICENSE.txt": "/todo-list/static/js/2.afae2eb6.chunk.js.LICENSE.txt",
     "static/media/style.css": "/todo-list/static/media/bg-desktop-light.3508d620.jpg",
     "static/media/icon-cross.6ee81d30.svg": "/todo-list/static/media/icon-cross.6ee81d30.svg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.304ebc1c.js",
     "static/js/2.afae2eb6.chunk.js",
-    "static/css/main.4f553454.chunk.css",
-    "static/js/main.c7da0f24.chunk.js"
+    "static/css/main.8bd25870.chunk.css",
+    "static/js/main.eeb9885c.chunk.js"
   ]
 }
