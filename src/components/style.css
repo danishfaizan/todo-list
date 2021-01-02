@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 * {
   margin: 0;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   min-height: 100vh;
 }
 
@@ -46,8 +46,8 @@ input[type='text'] {
 
 textarea {
   width: 100%;
-  font-size: 1.2rem;
-  padding: 20px 10px 0 10px;
+  font-size: 1.26rem;
+  padding: 24px 10px 0 10px;
   border-radius: 10px;
   border: none;
   resize: none;
