@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/todo-list/static/css/main.d7031e31.chunk.css",
-    "main.js": "/todo-list/static/js/main.c5f911fb.chunk.js",
-    "main.js.map": "/todo-list/static/js/main.c5f911fb.chunk.js.map",
+    "main.css": "/todo-list/static/css/main.a5b6fdbf.chunk.css",
+    "main.js": "/todo-list/static/js/main.b56ab2f0.chunk.js",
+    "main.js.map": "/todo-list/static/js/main.b56ab2f0.chunk.js.map",
     "runtime-main.js": "/todo-list/static/js/runtime-main.304ebc1c.js",
     "runtime-main.js.map": "/todo-list/static/js/runtime-main.304ebc1c.js.map",
     "static/js/2.e536a2bf.chunk.js": "/todo-list/static/js/2.e536a2bf.chunk.js",
     "static/js/2.e536a2bf.chunk.js.map": "/todo-list/static/js/2.e536a2bf.chunk.js.map",
     "index.html": "/todo-list/index.html",
-    "static/css/main.d7031e31.chunk.css.map": "/todo-list/static/css/main.d7031e31.chunk.css.map",
+    "static/css/main.a5b6fdbf.chunk.css.map": "/todo-list/static/css/main.a5b6fdbf.chunk.css.map",
     "static/js/2.e536a2bf.chunk.js.LICENSE.txt": "/todo-list/static/js/2.e536a2bf.chunk.js.LICENSE.txt",
     "static/media/icon-cross.6ee81d30.svg": "/todo-list/static/media/icon-cross.6ee81d30.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.304ebc1c.js",
     "static/js/2.e536a2bf.chunk.js",
-    "static/css/main.d7031e31.chunk.css",
-    "static/js/main.c5f911fb.chunk.js"
+    "static/css/main.a5b6fdbf.chunk.css",
+    "static/js/main.b56ab2f0.chunk.js"
   ]
 }
