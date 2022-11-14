@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    depends_on:
+      - mysql
+    volumes:
+      - .:/usr/src/app
+    environment:
+      DB_SERVER_HOST: mysql
+      DB_SERVER_PORT: 3306
+      DB_NAME: test
+      DB_USER: root
+      DB_PASSWORD: root
+      HTTP_SERVER_PORT: 3000
+    ports:
+      - "3000:3000"
+    command: /bin/sh -c "sleep 10; npm run dev"
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: root

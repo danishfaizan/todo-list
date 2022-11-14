@@ -1,0 +1,23 @@
+const knex = require('knex')({
+  client: 'mysql2',
+  connection: {
+    host: process.env.DB_SERVER_HOST,
+    port: process.env.DB_SERVER_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  },
+});
+
+async function migrateDB() {
+  await knex.migrate.latest({
+    directory: './app/db/migrations',
+  });
+
+  console.log('Finished db migrations');
+}
+
+module.exports = {
+  knex,
+  migrateDB,
+};
